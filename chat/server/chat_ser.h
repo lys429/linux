@@ -26,11 +26,11 @@ namespace server
       int BroadCast();
 	  static void* Consume(void*);
 	  static void* Product(void*);
-	  void AddUser(sockaddr_in adr, const std::string&name);
-	  void DelUser(sockaddr_in adr, const std::string&name);
+	  void AddUser(sockaddr_in addr, const std::string& name);
+	  void DelUser(sockaddr_in addr, const std::string& name);
 	  void SendMsg(const std::string&str, sockaddr_in addr);
     protected:
-	  std::unordered_map<std::string, sockaddr_in> online_friend_list_;
+	  std::unordered_map<std::string, sockaddr_in> online_friend_list_;//hash_map
       BlockQueue<Context> queue_;
       int sock_;
   };

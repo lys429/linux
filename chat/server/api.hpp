@@ -2,6 +2,7 @@
 #include<strings.h>
 #include<iostream>
 #include<jsoncpp/json/json.h>
+//Json数据的保存，序列化和反序列化
 namespace server{
 
   struct Data
@@ -33,7 +34,6 @@ namespace server{
       msg = value["msg"].asString();
       cmd = value["cmd"].asString();
       return;
-
     }
 
   };

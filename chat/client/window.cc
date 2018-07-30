@@ -15,7 +15,7 @@ namespace  client
     endwin();//销毁窗
 
   }
-  void Window::DrawHeader()
+  void Window::DrawHeader()//绘制标题窗
   {
     int h = LINES / 5;
     int w = COLS;
@@ -77,34 +77,30 @@ namespace  client
     wrefresh(friend_list_win_);
 
   }
-  void Window::PutStrTowin(WINDOW* win, int y, int x, const std::string&str)
+  void Window::PutStrTowin(WINDOW* win, int y, int x, const std::string& str)
   {
     mvwaddstr(win, y, x, str.c_str());
 
   }
-  void Window::GetStrFromWin(WINDOW* win, std::string*str)
+  void Window::GetStrFromWin(WINDOW* win, std::string* str)//从输入窗口读信息到buf中
   {
     char buf[1024 * 10] = { 0  };
     wgetnstr(win, buf, sizeof(buf)-1);//读取
     *str = buf;
-
   }
-  void Window::AddMsg(const std::string&msg)
+  void Window::AddMsg(const std::string& msg)
   {
     msgs_.push_back(msg);
-    int max_line = LINES * 3 / 5 - 2;
+    int max_line = LINES * 3 / 5 - 2;//消息栏最大的容纳消息数
     if (max_line < 3)
     {
-      LOG(ERROR) << "max_line too small\n";
+      LOG(ERROR) << "Max_line too less\n";
       exit(0);
-
     }
     if (msgs_.size() > max_line)
     {
       msgs_.pop_front();
-
     }
-
   }
   void Window::AddFriend(const std::string& friend_info)
   {
@@ -125,16 +121,7 @@ namespace  client
 //  client::Window win;
 //  win.DrawHeader();
 //  win.DrawInput();
-//  win.AddMsg("chan1:haha");
-//  win.AddMsg("chan2:haha");
-//  win.AddMsg("chan3:haha");
-//  win.AddMsg("chan4:haha");
-//  win.AddMsg("chan5:haha");
 //  win.DrawOutput();
-//  win.AddFriend("chan1|陕科大");
-//  win.AddFriend("chan2|陕科大");
-//  win.AddFriend("chan3|陕科大");
-//  win.AddFriend("chan4|陕科大");
 //  win.DrawFriendList();
 //  sleep(5);
 //  return 0;

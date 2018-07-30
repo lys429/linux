@@ -26,7 +26,7 @@ namespace server{
           sem_destroy(&sem_blank_);
 
         }
-        void PushBack(const T&value)
+        void PushBack(const T& value)
         {
           sem_wait(&sem_blank_);//blank进行p操作（--）
           data_[tail_++] = value;
@@ -39,7 +39,7 @@ namespace server{
           sem_post(&sem_data_);//V操作++
 
         }
-        void PopFront(T*value)
+        void PopFront(T* value)
         {
           sem_wait(&sem_data_);//数据进行p操作（--）
           *value = data_[head_++];

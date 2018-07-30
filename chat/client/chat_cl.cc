@@ -1,18 +1,17 @@
 #include"chat_cl.h"
 #include<iostream>
 namespace client{
-  int ChatClient::Init(const std::string& server_ip, short server_port)
+  int ChatClient::Init(const std::string& ser_ip, short ser_port)
   {
     sock_ = socket(AF_INET, SOCK_DGRAM, 0);
     if (sock_ < 0)
     {
       perror("socket");
-      return -1;
-
+	  return -1;
     }
     server_addr_.sin_family = AF_INET;
-    server_addr_.sin_addr.s_addr = inet_addr(server_ip.c_str());
-    server_addr_.sin_port = htons(server_port);
+    server_addr_.sin_addr.s_addr = inet_addr(ser_ip.c_str());//点分十进制，转换成unit32
+    server_addr_.sin_port = htons(ser_port);
     return 0;
 
   }
@@ -41,13 +40,7 @@ namespace client{
     return;
 
   }
-  /*void Print(const std::string&log)
-  {
-    FILE*fp = fopen("./log.txt", "a");
-    fwrite(log.c_str(), log.size(), 1, fp);
-    fclose(fp);
 
-  }*/
   void ChatClient::RecvMsg(server::Data* data)
   {
 
@@ -60,7 +53,6 @@ namespace client{
 
     }
     buf[read_size] = '\0';
-    //Print(buf);
     data->UnSerialize(buf);//反序列化
     return;
 
